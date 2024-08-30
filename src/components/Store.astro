@@ -1,0 +1,24 @@
+---
+import Sneaker001 from "./Sneakers/Sneaker001.astro";
+---
+
+<section
+  class="sneaker-company container"
+  style="--custom-width: 1100px"
+  >
+
+  <Sneaker001 />
+
+</section>
+
+<style>
+  .sneaker-company {
+    margin-top: 5em;
+  }
+
+  @media (width <= 600px) {
+    .sneaker-company {
+      margin-top: 0em;
+    }
+  }
+</style>

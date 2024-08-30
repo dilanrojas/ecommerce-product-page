@@ -1,0 +1,211 @@
+---
+import Cart from "./Cart.astro";
+---
+
+<header>
+  <div class="mb-only dim-background"></div>
+  <div class="nav-wrapper container">
+    <img class="mb-only open-menu" src="/icon-menu.svg" alt="Open mobile navbar">
+    <img class="logo" src="/logo.svg" alt="Logo">
+    <ul class="pm-nav">
+      <li><img class="mb-only close-menu" src="/icon-close.svg" alt="Mobile navbar"></li>
+      <li><a href="#">Collections</a></li>
+      <li><a href="#">Men</a></li>
+      <li><a href="#">Women</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <ul class="icon-nav">
+      <li>
+          <Cart />
+      </li>
+      <li>
+        <a href="#">
+          <img class="user-avatar" src="/image-avatar.png" alt="User avatar">
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  header {
+    background-color: white;
+  }
+
+  .nav-wrapper {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+    height: 90px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.101);
+    padding-top: .3em;
+    position: relative;
+  }
+
+  .logo {
+    padding-bottom: 4px;
+  }
+
+  .pm-nav {
+    display: flex;
+    gap: 1.5em;
+    color: var(--dk-gray-blue);
+    flex-grow: 1;
+    align-items: center;
+    height: 100%;
+  }
+
+  .pm-nav li {
+    height: 100%;
+  }
+
+  .pm-nav a {
+    display: flex;
+    align-items: center;
+    transition: color .12s ease-out;
+    position: relative;
+    height: 100%;
+    font-weight: 500;
+  }
+
+  .pm-nav a::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0%;
+    height: 3px;
+    background-color: var(--orange);
+    bottom: 0;
+    transition: width .12s ease-out;
+  }
+
+  .pm-nav a:hover::before,
+  .pm-nav a.active::before {
+    width: 100%;
+  }
+
+  .pm-nav a:hover {
+    color: var(--vdk-blue);
+  }
+
+  .icon-nav {
+    display: flex;
+    gap: 2.5em;
+    align-items: center;
+  }
+
+  .user-avatar {
+    width: 40px;
+    border-radius: 100%;
+    outline: 2px solid transparent;
+    transition: outline .12s ease;
+  }
+
+  .user-avatar:hover {
+    outline-offset: 1px;
+    outline: 2px solid var(--orange);
+  }
+
+  .open-menu,
+  .close-menu {
+    cursor: pointer;
+  }
+
+  .dim-background {
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.224);
+    width: 100%;
+    height: 100%;
+    background-color: 100%;
+    top: 0;
+    z-index: 80;
+    opacity: 0;
+    animation: fadeIn .3s forwards
+  }
+
+  @media (width <= 830px) {
+    .dim-background.active {
+      display: block;
+    }
+
+    .logo {
+      margin-right: auto;
+    }
+
+    .pm-nav {
+      position: fixed;
+      background-color: white;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      height: 100%;
+      width: 230px;
+      padding-top: 2.4em;
+      padding-left: 2.1em;
+      left: -500px;
+      top: 0;
+      z-index: 90;
+      transition: left .2s ease;
+    }
+
+    .pm-nav.active {
+      left: 0;
+    }
+
+    .pm-nav a {
+      color: var(--vdk-blue);
+      font-weight: 700;
+    }
+
+    .pm-nav a::before {
+      display: none;
+    }
+
+    .pm-nav a,
+    .pm-nav li {
+      height: min-content;
+    }
+
+    .pm-nav a:hover {
+      color: var(--orange);
+    }
+    
+    body[no-scroll] {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+
+    .close-menu {
+      padding-bottom: 1.5em;
+    }
+
+    .user-avatar {
+      width: 28px;
+    }
+  }
+
+</style>
+
+<script>
+  const openMenu = document.querySelector(".open-menu") as HTMLElement;
+  const closeMenu = document.querySelector(".close-menu") as HTMLElement;
+  const mobileMenu = document.querySelector(".pm-nav") as HTMLElement;
+  const mobileBg = document.querySelector(".dim-background") as HTMLElement;
+
+  openMenu.addEventListener("click", () => {
+    mobileMenu.classList.add("active");
+    mobileBg.classList.add("active");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    mobileMenu.classList.remove("active");
+    mobileBg.style.animation = "fadeOut .3s forwards";
+    mobileBg.addEventListener("animationend", () => {
+      mobileBg.classList.remove("active");
+      mobileBg.style.animation = "";
+    }, {once: true})
+  });
+</script>

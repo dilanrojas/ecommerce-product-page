@@ -1,0 +1,382 @@
+---
+import Tools from "../Tools.astro";
+---
+
+<div class="even-columns sneaker-001">
+
+  <div class="image-wrapper">
+    <div class="active-image-wrapper">
+      <div class="slider-controls">
+        <div class="slider-btn previous">
+          <img src="/icon-previous.svg" alt="Previous image">
+        </div>
+        <div class="slider-btn next">
+          <img src="/icon-next.svg" alt="Next image">
+        </div>
+      </div>
+      <img class="active-image" src="/image-product-1.jpg" alt="Sneaker image">
+    </div>
+    <div class="thumbnails-wrapper">
+      <div class="thumbnail active-thumbnail">
+        <img id="1" src="/image-product-1-thumbnail.jpg" alt="Sneaker image">
+      </div>
+      <div class="thumbnail">
+        <img id="2" src="/image-product-2-thumbnail.jpg" alt="Sneaker image">
+      </div>
+      <div class="thumbnail">
+        <img id="3" src="/image-product-3-thumbnail.jpg" alt="Sneaker image">
+      </div>
+      <div class="thumbnail">
+        <img id="4" src="/image-product-4-thumbnail.jpg" alt="Sneaker image">
+      </div>
+    </div>
+  </div>
+
+  <div class="details-wrapper">
+    <div class="title">
+      <p>Sneaker company</p>
+      <h1>Fall limited edition sneakers</h1>
+    </div>
+    <div class="description">
+      <p>These low-profile sneakers are your perfect
+      casual wear companion. Featuring a durable rubber
+      outer sole, they'll withstand everything the
+      weather can offer.</p>
+
+      <div class="product-price">
+        <div class="main-price">
+          <span class="price">$125.00</span>
+          <span class="discount">50%</span>
+        </div>
+        <div class="product-discount">
+          <span class="og-price">$250.00</span>
+        </div>
+      </div>
+    </div>
+
+    <Tools sneaker="sneaker-001"/>
+
+  </div>
+
+  <!-- Cart Item -->
+  <div class="sneaker-001-cart">
+    <img class="sneaker-thumbnail" src="/image-product-1-thumbnail.jpg" alt="Sneaker thumbnail">
+    <div class="item-info">
+      <p>Fall limited edition sneakers</p>
+      <div class="pricing">
+        <span class="unit"></span>
+        <span class="quantity"></span>
+        <span class="total-price"></span>
+      </div>
+    </div>
+    <img class="icon-delete" src="/icon-delete.svg" alt="Delete item">
+  </div>
+
+</div>
+
+<style>
+  .details-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 49ch;
+  }
+
+  .slider-controls {
+    display: none;
+    position: absolute;
+    justify-content: space-between;
+    gap: 2em;
+    width: 85%;
+  }
+
+  .slider-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .slider-btn img {
+    z-index: 70;
+    width: 9px!important;
+  }
+
+  .slider-btn::after {
+    --size: 36px;
+
+    content: '';
+    position: absolute;
+    background-color: white;
+    min-height: var(--size);
+    min-width: var(--size);
+    border-radius: 100%;
+    box-shadow: 0px 0px 5px rgb(0, 0, 0, .5);
+  }
+
+  .active-image {
+    margin-bottom: 1.2em;
+    display: flex;
+  }
+
+  .active-image-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title {
+    margin-bottom: 2.2em;
+  }
+
+  .title p {
+    text-transform: uppercase;
+    color: var(--dk-gray-blue);
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: .91em;
+    margin-bottom: 1.2em
+  }
+
+  .title h1 {
+    text-transform: capitalize;
+    font-size: 2.8em;
+  }
+
+  .description {
+    margin-bottom: 1.5em
+  }
+
+  .description p {
+    color: var(--dk-gray-blue);
+    margin-bottom: 1.2em;
+  }
+
+  .main-price {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: .3em;
+  }
+
+  .price {
+    font-size: 1.85em;
+    font-weight: 600;
+  }
+
+  .discount {
+    background-color: black;
+    color: var(--white);
+    padding: .1em .5em;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+
+  .og-price {
+    text-decoration: line-through;
+    color: var(--dk-gray-blue);
+  }
+
+  .image-wrapper img {
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+  }
+
+  .image-wrapper {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 2em;
+    flex-direction: column;
+    padding-right: 8em;
+  }
+
+  @media(width <= 1030px) {
+    .image-wrapper {
+      padding-right: 4em;
+    }
+  }
+
+  @media(width <= 900px) {
+    .image-wrapper {
+      padding-right: 2em;
+    }
+
+    .thumbnails-wrapper {
+      gap: .8em;
+    }
+  }
+
+  .thumbnails-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .thumbnails-wrapper > div {
+    --size: 82px;
+
+    cursor: pointer;
+    border-radius: 12px;
+    width: var(--size);
+    height: var(--size);
+    outline: 2px solid transparent;
+    transition: outline .2s ease,
+                opacity .2s ease,
+                outline-offset .2s ease;
+  }
+  
+  .thumbnails-wrapper img:hover:not(.active-thumbnail img) {
+    opacity: .55;
+    transition: opacity .2s ease,
+  }
+  
+  .active-thumbnail {
+    outline: 2px solid var(--orange)!important;
+  }
+
+  .active-thumbnail img {
+    opacity: .3;
+  }
+
+  @media(width <= 800px) {
+    .details-wrapper {
+      font-size: .9em;
+      max-width: 100%;
+    }
+
+    .title h1 {
+      font-size: 2em;
+    }
+    
+    .image-wrapper {
+      max-width: 300px;
+    }
+
+    .thumbnails-wrapper > div {
+      --size: 64px
+    }
+  }
+
+  @media(width <= 600px) {
+    .even-columns {
+      grid-template-columns: 1fr;
+    }
+
+    .image-wrapper {
+      padding: 0em;
+      max-width: 100%;
+    }
+
+    .thumbnails-wrapper {
+      display: none;
+    }
+
+    .slider-controls {
+      display: flex;
+    }
+
+    .image-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .details-wrapper {
+      margin-bottom: 2em;
+    }
+  }
+
+  /* Cart Item */
+  .sneaker-001-cart {
+    display: none;
+    grid-template-columns: 45px 1fr auto;
+    gap: 1em;
+    align-items: center;
+  }
+
+  .sneaker-thumbnail {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .icon-delete {
+    cursor: pointer;
+  }
+
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: .88em;
+    color: var(--dk-gray-blue);
+    height: 100%;
+  }
+
+  .total-price {
+    color: black;
+    font-weight: 700;
+  }
+</style>
+
+<script>
+  const thumbnail = document.querySelectorAll<HTMLElement>(".thumbnail");
+  const activeImage = document.querySelector<HTMLImageElement>(".active-image");
+  const next = document.querySelector(".next");
+  const previous = document.querySelector(".previous");
+
+  thumbnail.forEach(item => {
+    item.addEventListener("click", () => {
+      document.querySelector(".active-thumbnail").classList.remove("active-thumbnail");
+      
+      item.classList.add("active-thumbnail");
+      const nextImg = item.querySelector("img").id;
+
+      activeImage.src = "/image-product-" + nextImg + ".jpg";
+    })
+  });
+
+  next.addEventListener("click", () => {
+    const currentImageID = parseInt(document.querySelector(".active-thumbnail img").id);
+    const currentImage = document.querySelector(".active-thumbnail") as HTMLElement;
+    const thumbnails = document.querySelectorAll<HTMLElement>(".thumbnail img");
+      
+    if (currentImageID < 4) {
+      currentImage.classList.remove("active-thumbnail");
+      const nextImage = (currentImageID + 1).toString();
+      activeImage.src = "/image-product-" + nextImage + ".jpg";
+
+      thumbnails.forEach(img => {
+        if (img.id.includes(nextImage)) {
+          img.parentElement.classList.add("active-thumbnail");
+        };
+      });
+    };
+  });
+
+  previous.addEventListener("click", () => {
+    const currentImageID = parseInt(document.querySelector(".active-thumbnail img").id);
+    const currentImage = document.querySelector(".active-thumbnail") as HTMLElement;
+    const thumbnails = document.querySelectorAll<HTMLElement>(".thumbnail img");
+      
+    if (currentImageID > 1) {
+      currentImage.classList.remove("active-thumbnail");
+      const nextImage = (currentImageID - 1).toString();
+      activeImage.src = "/image-product-" + nextImage + ".jpg";
+
+      thumbnails.forEach(img => {
+        if (img.id.includes(nextImage)) {
+          img.parentElement.classList.add("active-thumbnail");
+        };
+      });
+    };
+  });
+
+  const iconDelete = document.querySelector(".icon-delete") as HTMLElement;
+  
+  iconDelete.addEventListener("click", () => {
+    iconDelete.parentElement.remove();
+  });
+</script>

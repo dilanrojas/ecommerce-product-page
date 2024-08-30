@@ -1,0 +1,152 @@
+---
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Header />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
+
+	:root {
+		--orange: hsl(26, 100%, 55%);
+		--pale-orange: hsl(25, 100%, 94%);
+		--vdk-blue: hsl(220, 13%, 13%);
+		--dk-gray-blue: hsl(219, 9%, 45%);
+		--gray-blue: hsl(220, 14%, 75%);
+		--lg-gray-blue: hsl(223, 64%, 98%);
+		--white: hsl(0, 0%, 100%);
+		--black: hsl(0, 0%, 0%);
+		--lightbox-bg: hsla(0, 0%, 0%, 0.75);
+
+		--ff-html: "Kumbh Sans", sans-serif;
+	}
+
+	@keyframes fadeOut {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+
+	@keyframes fadeIn {
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes scaleIn {
+		0% {
+			scale: 0%;
+			opacity: 0;
+		}
+		100% {
+			scale: 100%;
+			opacity: 1;
+			display: block;
+		}
+	}
+
+	@keyframes scaleOut {
+		0% {
+			scale: 100%;
+			opacity: 1;
+		}
+		100% {
+			scale: 0%;
+			opacity: 0;
+			display: none;
+		}
+	}
+
+	@keyframes slideOut {
+		50% {
+			opacity: .5;
+		}
+		100% {
+			transform: translateX(150px);
+			opacity: 0;
+		}
+	}
+
+	html {
+		line-height: 1.5;
+		font-size: 16px;
+		font-family: var(--ff-html);
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+	
+	a {
+		color: currentColor;
+		text-decoration: none;
+	}
+	
+	ul, ol {
+		list-style: none;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		line-height: 1;
+	}
+
+	input, textarea, button {
+		font-family: inherit;
+		font-size: inherit;
+	}
+
+	/* Utility classes */
+	.container {
+		--width: var(--custom-width, 1200px);
+		--padding: var(--custom-padding, 2rem);
+
+		width: min(var(--width), 100% - (var(--padding) * 2));
+		margin-inline: auto;
+	}
+
+	.even-columns {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.flow > * + * {
+		margin-top: var(--flow-space, 1em)
+	}
+
+	.mb-only {
+		display: none;
+	}
+
+	@media (width <= 830px) {
+		.mb-only {
+			display: block;
+		}
+	}
+</style>
