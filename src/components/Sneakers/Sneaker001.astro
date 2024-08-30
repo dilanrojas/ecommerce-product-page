@@ -113,6 +113,11 @@ import Tools from "../Tools.astro";
     min-width: var(--size);
     border-radius: 100%;
     box-shadow: 0px 0px 5px rgb(0, 0, 0, .5);
+    transition: background-color .18s ease;
+  }
+
+  .slider-btn:hover::after {
+    background-color: rgb(255, 255, 255, .6)
   }
 
   .active-image {
