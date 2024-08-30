@@ -1,4 +1,5 @@
-  <div class="cart">
+<div class="cart">
+  <div class="item-counter">0</div>
   <svg
     class="cart-icon"
     width="22"
@@ -39,6 +40,29 @@
     justify-content: center;
     user-select: none;
     -webkit-user-select: none;
+    height: 100%;
+  }
+
+  .cart.active .item-counter {
+    display: flex;
+  }
+
+  .item-counter {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    font-size: .7em;
+    font-weight: 500;
+    position: absolute;
+    background-color: var(--orange);
+    padding-inline: 10px;
+    height: 15px;
+    margin-left: 1.3em;
+    top: 28px;
+    border-radius: 100px;
+    pointer-events: none;
   }
 
   .cart-content {

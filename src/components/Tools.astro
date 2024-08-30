@@ -145,7 +145,7 @@
   const tools = document.querySelector(".tools") as HTMLElement;
   const cart = document.querySelector(".cart") as HTMLElement;
   const cartItems = document.querySelector(".cart-items") as HTMLElement;
-  const cartContent = document.querySelector(".cart-content") as HTMLElement;
+  const cartCounter = document.querySelector(".item-counter") as HTMLElement;
 
   iconPlus.addEventListener("click", () => {
     quantity.textContent = (parseInt(quantity.textContent) + 1).toString();
@@ -176,6 +176,9 @@
       const deleteSneaker = sneakerContent.querySelector(".icon-delete");
       deleteSneaker.addEventListener("click", () => {
         sneakerCounter = sneakerCounter - 1;
+        const currentCartItem = document.querySelector("."+tools.getAttribute("aria-details")+"-cart");
+        const preivousQuantity = parseInt(currentCartItem.querySelector(".quantity").textContent.replace(/[^\d.]/g, ""));
+        cartCounter.textContent = (parseInt(cartCounter.textContent) - preivousQuantity).toString();
         sneakerCart.style.animation = "slideOut .4s forwards";
         sneakerCart.addEventListener("animationend", () => {
           sneakerCart.remove();
@@ -195,6 +198,7 @@
       let productPrice = parseInt(sneakerPrice.textContent.replace(/[^\d.]/g, ""));
       let productQuantity = parseInt(sneakerQuantity.textContent.replace(/[^\d.]/g, ""));
       sneakerTotal.textContent = ("$" + productPrice * productQuantity + ".00").toString();
+      cartCounter.textContent = productQuantity.toString();
     } else {
       let addedSneaker = document.querySelector("#"+tools.getAttribute("aria-details"));
       const addedQuantity = addedSneaker.querySelector(".quantity") as HTMLElement;
@@ -202,6 +206,7 @@
       let editedQuantity = (parseInt(document.querySelector(".product-quantity").textContent.replace(/[^\d.]/g, "")));
       let newQuantity = (parseInt(addedQuantity.textContent.replace(/[^\d.]/g, "")) + editedQuantity);
       addedQuantity.textContent = "x" + newQuantity;
+      cartCounter.textContent = newQuantity.toString();
 
       const addedTotal = addedSneaker.querySelector(".total-price") as HTMLElement;
       let sneakerPrice = parseInt(addedSneaker.querySelector(".unit").textContent.replace(/[^\d.]/g, ""));
