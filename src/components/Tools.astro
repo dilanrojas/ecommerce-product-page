@@ -159,6 +159,7 @@
 
   let sneakerCounter = 0;
   addToCart.addEventListener("click", () => {
+    quantity.textContent = "1";
     const currentSneaker = document.querySelector("."+tools.getAttribute("aria-details"));
     const currentSneakerCart = document.querySelector("."+tools.getAttribute("aria-details")+"-cart");
     
